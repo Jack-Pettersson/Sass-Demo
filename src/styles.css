@@ -1,3 +1,41 @@
+@charset "UTF-8";
+.fancy-quote {
+  position: relative;
+  background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
+  border-left: 6px solid #3498db;
+  margin: 2rem auto 1.5rem auto;
+  padding: 1.5rem 2rem 1.5rem 2.5rem;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  max-width: 700px;
+  text-align: left;
+}
+
+.fancy-quote:before {
+  content: "“";
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  font-size: 3rem;
+  color: #3498db;
+  opacity: 0.2;
+  font-family: serif;
+}
+
+.fancy-quote:after {
+  content: "”";
+  position: absolute;
+  right: 18px;
+  bottom: 10px;
+  font-size: 3rem;
+  color: #3498db;
+  opacity: 0.2;
+  font-family: serif;
+}
+
 .main-menu {
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
