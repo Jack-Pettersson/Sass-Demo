@@ -1,0 +1,4 @@
+# Ignore all source map files
+*.map
+# Ignore VS Code settings directory
+.vscode/
