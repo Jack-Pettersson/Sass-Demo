@@ -11,9 +11,9 @@ This project demonstrates the use of Sass (SCSS) for styling a simple web page.
 ## Usage
 1. Edit the `.scss` files in the `src/` directory.
 2. Compile Sass to CSS using:
-   ```
+```
 sass src/styles.scss src/styles.css
-   ```
+```
 3. Open `index.html` in your browser to view the result.
 
 ## Notes
