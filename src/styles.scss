@@ -1,97 +1,7 @@
 @use 'sass:color';
 @use 'variables' as *;
-// Fancy blockquote styles
-.fancy-quote {
-  position: relative;
-  background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
-  border-left: 6px solid $primary-color;
-  margin: 2rem auto 1.5rem auto;
-  padding: 1.5rem 2rem 1.5rem 2.5rem;
-  font-style: italic;
-  font-size: 1.2rem;
-  color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  max-width: 700px;
-  text-align: left;
-}
-.fancy-quote:before {
-  content: "\201C";
-  position: absolute;
-  left: 12px;
-  top: 10px;
-  font-size: 3rem;
-  color: $primary-color;
-  opacity: 0.2;
-  font-family: serif;
-}
 
-.fancy-quote:after {
-  content: "\201D";
-  position: absolute;
-  right: 18px;
-  bottom: 10px;
-  font-size: 3rem;
-  color: $primary-color;
-  opacity: 0.2;
-  font-family: serif;
-}
-
-// Main menu styles
-.main-menu {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  margin-bottom: 2rem;
-}
-.main-menu ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  display: flex;
-  justify-content: flex-start;
-  gap: 2rem;
-  max-width: 60%;
-}
-.main-menu a {
-  display: block;
-  padding: 1rem 0.5rem;
-  color: #4776e6;
-  text-decoration: none;
-  font-family: $font-family-main;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: color 0.2s;
-}
-.main-menu a:hover {
-  color: $primary-color;
-  text-decoration: underline;
-}
-
-
-// Header styles
-.main-header {
-  background: linear-gradient(90deg, #8e54e9 0%, #4776e6 100%);
-  padding: 1.5rem 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-
-.main-header nav {
-  max-width: 60%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.logo {
-  font-family: $font-family-heading;
-  font-size: 2rem;
-  color: #fff;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  white-space: nowrap;
-}
-
+// Body and global styles
 body {
   font-family: $font-family-main;
   background: #f4f4f4;
@@ -99,6 +9,66 @@ body {
   padding: 0;
 }
 
+// Header styles
+header.main-header {
+  background: linear-gradient(90deg, #8e54e9 0%, #4776e6 100%);
+  padding: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+  nav {
+    max-width: 60%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .logo {
+      font-family: $font-family-heading;
+      font-size: 2rem;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      white-space: nowrap;
+    }
+  }
+}
+
+// Main menu styles
+nav.main-menu {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 2rem;
+
+  ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    max-width: 60%;
+
+    li {
+      a {
+        display: block;
+        padding: 1rem 0.5rem;
+        color: #4776e6;
+        text-decoration: none;
+        font-family: $font-family-main;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: color 0.2s;
+
+        &:hover {
+          color: $primary-color;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// Container styles
 .container {
   background: #fff;
   max-width: 60%;
@@ -107,61 +77,109 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   text-align: center;
-}
 
-h1 {
-  font-family: $font-family-heading;
-}
+  h1 {
+    font-family: $font-family-heading;
+  }
 
-.btn-primary {
-  background: $primary-color;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
-  &:hover {
-  background: color.scale($primary-color, $lightness: -10%);
+  article {
+    // Fancy blockquote styles
+    blockquote.fancy-quote {
+      position: relative;
+      background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
+      border-left: 6px solid $primary-color;
+      margin: 2rem auto 1.5rem auto;
+      padding: 1.5rem 2rem 1.5rem 2.5rem;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #333;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      max-width: 700px;
+      text-align: left;
+
+      &:before {
+        content: "\201C";
+        position: absolute;
+        left: 12px;
+        top: 10px;
+        font-size: 3rem;
+        color: $primary-color;
+        opacity: 0.2;
+        font-family: serif;
+      }
+
+      &:after {
+        content: "\201D";
+        position: absolute;
+        right: 18px;
+        bottom: 10px;
+        font-size: 3rem;
+        color: $primary-color;
+        opacity: 0.2;
+        font-family: serif;
+      }
+    }
+  }
+
+  button.btn-primary {
+    background: $primary-color;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background: color.scale($primary-color, $lightness: -10%);
+    }
   }
 }
 
 // Responsive styles
 @media (max-width: 900px) {
   .container,
-  .main-header nav,
-  .main-menu ul {
+  header.main-header nav,
+  nav.main-menu ul {
     max-width: 90%;
   }
 }
 
 @media (max-width: 600px) {
-  .container,
-  .main-header nav,
-  .main-menu ul {
-    max-width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .main-header {
+  header.main-header {
     padding: 0.5rem 0;
 
+    nav {
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      justify-content: center;
+
+      .logo {
+        font-size: 1.3rem;
+      }
+    }
   }
-  .main-header nav {
-    justify-content: center;
+
+  nav.main-menu {
+    ul {
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      flex-direction: column;
+      gap: 0;
+
+      li {
+        a {
+          padding: 0.5rem 0.5rem;
+          font-size: 1rem;
+        }
+      }
+    }
   }
-  .logo {
-    font-size: 1.3rem;
-  }
-  .main-menu ul {
-    flex-direction: column;
-    gap: 0;
-  }
-  .main-menu a {
-    padding: 0.5rem 0.5rem;
-    font-size: 1rem;
-  }
+
   .container {
     margin: 1.5rem auto;
     padding: 1rem;

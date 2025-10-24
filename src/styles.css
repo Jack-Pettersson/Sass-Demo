@@ -1,5 +1,74 @@
 @charset "UTF-8";
-.fancy-quote {
+body {
+  font-family: "Quicksand", Calibri, Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+header.main-header {
+  background: linear-gradient(90deg, #8e54e9 0%, #4776e6 100%);
+  padding: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+header.main-header nav {
+  max-width: 60%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+header.main-header nav .logo {
+  font-family: "Pacifico", Calibri, cursive, Arial, sans-serif;
+  font-size: 2rem;
+  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+nav.main-menu {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 2rem;
+}
+nav.main-menu ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  max-width: 60%;
+}
+nav.main-menu ul li a {
+  display: block;
+  padding: 1rem 0.5rem;
+  color: #4776e6;
+  text-decoration: none;
+  font-family: "Quicksand", Calibri, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+nav.main-menu ul li a:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.container {
+  background: #fff;
+  max-width: 60%;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+.container h1 {
+  font-family: "Pacifico", Calibri, cursive, Arial, sans-serif;
+}
+.container article blockquote.fancy-quote {
   position: relative;
   background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
   border-left: 6px solid #3498db;
@@ -13,8 +82,7 @@
   max-width: 700px;
   text-align: left;
 }
-
-.fancy-quote:before {
+.container article blockquote.fancy-quote:before {
   content: "“";
   position: absolute;
   left: 12px;
@@ -24,8 +92,7 @@
   opacity: 0.2;
   font-family: serif;
 }
-
-.fancy-quote:after {
+.container article blockquote.fancy-quote:after {
   content: "”";
   position: absolute;
   right: 18px;
@@ -35,84 +102,7 @@
   opacity: 0.2;
   font-family: serif;
 }
-
-.main-menu {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  margin-bottom: 2rem;
-}
-
-.main-menu ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  display: flex;
-  justify-content: flex-start;
-  gap: 2rem;
-  max-width: 60%;
-}
-
-.main-menu a {
-  display: block;
-  padding: 1rem 0.5rem;
-  color: #4776e6;
-  text-decoration: none;
-  font-family: "Quicksand", Calibri, Arial, sans-serif;
-  font-weight: 500;
-  font-size: 1.1rem;
-  transition: color 0.2s;
-}
-
-.main-menu a:hover {
-  color: #3498db;
-  text-decoration: underline;
-}
-
-.main-header {
-  background: linear-gradient(90deg, #8e54e9 0%, #4776e6 100%);
-  padding: 1.5rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.main-header nav {
-  max-width: 60%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.logo {
-  font-family: "Pacifico", Calibri, cursive, Arial, sans-serif;
-  font-size: 2rem;
-  color: #fff;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  white-space: nowrap;
-}
-
-body {
-  font-family: "Quicksand", Calibri, Arial, sans-serif;
-  background: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  background: #fff;
-  max-width: 60%;
-  margin: 3rem auto;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  text-align: center;
-}
-
-h1 {
-  font-family: "Pacifico", Calibri, cursive, Arial, sans-serif;
-}
-
-.btn-primary {
+.container button.btn-primary {
   background: #3498db;
   color: #fff;
   border: none;
@@ -122,39 +112,38 @@ h1 {
   font-size: 1rem;
   transition: background 0.2s;
 }
-.btn-primary:hover {
+.container button.btn-primary:hover {
   background: rgb(36.7380753138, 138.7882845188, 207.1619246862);
 }
 
 @media (max-width: 900px) {
   .container,
-  .main-header nav,
-  .main-menu ul {
+  header.main-header nav,
+  nav.main-menu ul {
     max-width: 90%;
   }
 }
 @media (max-width: 600px) {
-  .container,
-  .main-header nav,
-  .main-menu ul {
+  header.main-header {
+    padding: 0.5rem 0;
+  }
+  header.main-header nav {
     max-width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-  .main-header {
-    padding: 0.5rem 0;
-  }
-  .main-header nav {
     justify-content: center;
   }
-  .logo {
+  header.main-header nav .logo {
     font-size: 1.3rem;
   }
-  .main-menu ul {
+  nav.main-menu ul {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
     flex-direction: column;
     gap: 0;
   }
-  .main-menu a {
+  nav.main-menu ul li a {
     padding: 0.5rem 0.5rem;
     font-size: 1rem;
   }
