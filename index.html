@@ -3,38 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Small HTML + SASS Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+    <title>Advanced Sass Demo - Showcasing Modern Features</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
+    <!-- Header with Logo -->
     <header class="main-header">
         <nav>
-            <span class="logo">🌈 Fancy SASS Project</span>
+            <span class="logo">🌈 Advanced Sass Demo</span>
         </nav>
     </header>
+
+    <!-- Navigation Menu -->
     <nav class="main-menu">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#intro" class="active">Home</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#features">Features</a></li>
         </ul>
     </nav>
-    <div class="container">
-        <h1>Hello, SASS!</h1>
-        <p>This is a small HTML + SASS project.</p>
-        <article>
+
+    <!-- Main Content Container -->
+    <div class="container content-wrapper fade-in">
+        <h1>🎨 Advanced Sass Features Demo</h1>
+        <p class="text-muted">Explore modern Sass capabilities with 7-1 architecture, mixins, functions, and more!</p>
+
+        <!-- Introduction Article -->
+        <article id="intro">
             <blockquote class="fancy-quote">
                 <p>
-                    "Sass makes CSS fun and powerful! With variables, nesting, and more, you can write cleaner and more maintainable styles."
+                    "Sass makes CSS fun and powerful! With variables, nesting, mixins, functions, and more, you can write cleaner and more maintainable styles."
                 </p>
             </blockquote>
             <p>
-                Sass (Syntactically Awesome Style Sheets) is a preprocessor scripting language that is interpreted or compiled into CSS. It helps you write more flexible and organized stylesheets.
+                This demo showcases a <strong>professional 7-1 architecture pattern</strong>, custom functions, reusable mixins, 
+                placeholder selectors, component-based design, and responsive utilities. It's a comprehensive example of 
+                modern Sass best practices.
             </p>
         </article>
-        <button class="btn-primary">Click Me</button>
+
+        <div class="divider"></div>
+
+        <!-- Alert Examples -->
+        <section id="alerts" class="section-sm">
+            <h2>📢 Alert Components</h2>
+            <div class="alert alert-info">
+                <strong>Info:</strong> This is an informational alert using Sass color variables!
+            </div>
+            <div class="alert alert-success">
+                <strong>Success:</strong> Your Sass compilation was successful!
+            </div>
+            <div class="alert alert-warning">
+                <strong>Warning:</strong> Make sure to compile your Sass before deploying.
+            </div>
+            <div class="alert alert-danger">
+                <strong>Error:</strong> This demonstrates error styling with Sass functions.
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Button Examples -->
+        <section id="components" class="section-sm">
+            <h2>🔘 Button Variants</h2>
+            <p class="text-muted mb-lg">Buttons generated using @each loops and mixins</p>
+            
+            <div class="flex-center flex-wrap flex-gap-md mb-lg">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-accent">Accent</button>
+                <button class="btn btn-dark">Dark</button>
+                <button class="btn btn-warning">Warning</button>
+                <button class="btn btn-info">Info</button>
+            </div>
+
+            <h3>Outline Buttons</h3>
+            <div class="flex-center flex-wrap flex-gap-md mb-lg">
+                <button class="btn btn-outline-primary">Primary</button>
+                <button class="btn btn-outline-secondary">Secondary</button>
+                <button class="btn btn-outline-accent">Accent</button>
+            </div>
+
+            <h3>Button Sizes</h3>
+            <div class="flex-center flex-wrap flex-gap-md">
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary">Regular</button>
+                <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Card Examples -->
+        <section id="cards" class="section-sm">
+            <h2>🃏 Card Components</h2>
+            <p class="text-muted mb-lg">Responsive card grid with various styles</p>
+            
+            <div class="card-grid">
+                <div class="card card-hover card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Variables & Maps</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Comprehensive color palettes, spacing scales, and breakpoints defined in Sass maps 
+                            for easy maintenance and access.
+                        </p>
+                        <span class="badge">Abstracts</span>
+                    </div>
+                </div>
+
+                <div class="card card-hover card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Mixins & Functions</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Reusable patterns with @mixin for styles and @function for calculations. 
+                            Includes flexbox helpers, button variants, and responsive breakpoints.
+                        </p>
+                        <span class="badge badge-secondary">Utilities</span>
+                    </div>
+                </div>
+
+                <div class="card card-hover card-accent">
+                    <div class="card-header">
+                        <h3 class="card-title">7-1 Architecture</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Organized file structure with abstracts, base, components, and layout folders. 
+                            Modern @use and @forward module system.
+                        </p>
+                        <span class="badge badge-accent">Structure</span>
+                    </div>
+                </div>
+
+                <div class="card card-feature">
+                    <span class="card-icon">✨</span>
+                    <h3 class="card-title">Placeholder Selectors</h3>
+                    <p class="card-text">
+                        Use @extend with % placeholders for DRY (Don't Repeat Yourself) code without bloating CSS.
+                    </p>
+                </div>
+
+                <div class="card card-gradient">
+                    <h3 class="card-title">Gradient Background</h3>
+                    <p class="card-text">
+                        Beautiful gradient cards with automatic text color adjustments. 
+                        Perfect for call-to-action sections!
+                    </p>
+                    <button class="btn btn-outline-primary" style="border-color: white; color: white;">Learn More</button>
+                </div>
+
+                <div class="card card-stat">
+                    <div class="stat-value">50+</div>
+                    <div class="stat-label">Sass Features</div>
+                    <p class="card-text mt-md">
+                        This demo showcases over 50 different Sass features and best practices.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Form Examples -->
+        <section id="forms" class="section-sm">
+            <h2>📝 Form Components</h2>
+            <p class="text-muted mb-lg">Styled form inputs with validation states</p>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Contact Form</h3>
+                    </div>
+                    <div class="card-body" style="text-align: left;">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-label required">Full Name</label>
+                                <input type="text" class="form-input" placeholder="John Doe">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label required">Email</label>
+                                <input type="email" class="form-input is-valid" value="john@example.com">
+                                <div class="form-feedback valid-feedback">Looks good!</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input is-invalid" value="123">
+                                <div class="form-feedback invalid-feedback">Please enter a valid phone number.</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Country</label>
+                                <select class="form-select">
+                                    <option>Select a country</option>
+                                    <option>United States</option>
+                                    <option>Canada</option>
+                                    <option>United Kingdom</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-textarea" placeholder="Your message here..."></textarea>
+                                <div class="form-help">Max 500 characters</div>
+                            </div>
+                            
+                            <div class="form-check">
+                                <input type="checkbox" id="newsletter">
+                                <label for="newsletter">Subscribe to newsletter</label>
+                            </div>
+                            
+                            <div class="btn-group mt-lg">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Search & Input Group</h3>
+                    </div>
+                    <div class="card-body" style="text-align: left;">
+                        <div class="form-group">
+                            <label class="form-label">Search</label>
+                            <div class="search-form">
+                                <input type="search" class="form-input" placeholder="Search...">
+                                <span class="search-icon">🔍</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text">@</span>
+                                <input type="text" class="form-input" placeholder="username">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-input" placeholder="0.00">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Volume</label>
+                            <input type="range" class="form-range" min="0" max="100" value="50">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Preferences</label>
+                            <div class="form-check">
+                                <input type="radio" name="pref" id="pref1" checked>
+                                <label for="pref1">Option 1</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" name="pref" id="pref2">
+                                <label for="pref2">Option 2</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Feature Highlights -->
+        <section id="features" class="section-sm">
+            <h2>⚡ Feature Highlights</h2>
+            <div class="grid grid-4">
+                <div class="card card-feature">
+                    <span class="card-icon">📦</span>
+                    <h4 class="card-title">Modular</h4>
+                    <p class="card-text text-small">7-1 architecture pattern</p>
+                </div>
+                <div class="card card-feature">
+                    <span class="card-icon">🎨</span>
+                    <h4 class="card-title">Themeable</h4>
+                    <p class="card-text text-small">Dark mode support</p>
+                </div>
+                <div class="card card-feature">
+                    <span class="card-icon">📱</span>
+                    <h4 class="card-title">Responsive</h4>
+                    <p class="card-text text-small">Mobile-first design</p>
+                </div>
+                <div class="card card-feature">
+                    <span class="card-icon">⚙️</span>
+                    <h4 class="card-title">Customizable</h4>
+                    <p class="card-text text-small">Variables & maps</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Code Example -->
+        <section class="section-sm">
+            <h2>💻 Sass Code Example</h2>
+            <pre><code>// Using Sass mixins and functions
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+.my-button {
+  @include button-variant($primary-color);
+  padding: spacing(md);
+  font-size: font-size(lg);
+  
+  @include respond-to(md) {
+    width: 100%;
+  }
+}</code></pre>
+        </section>
+
+        <!-- Loading Spinner Demo -->
+        <section class="section-sm">
+            <h2>⏳ Loading Spinner</h2>
+            <div class="spinner mt-lg mb-lg"></div>
+        </section>
     </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+    </button>
+
+    <!-- JavaScript for Dark Mode Toggle -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Initialize theme on page load
+        const savedTheme = localStorage.getItem('theme');
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+        
+        if (savedTheme) {
+            // Use saved preference
+            body.setAttribute('data-theme', savedTheme);
+            themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        } else {
+            // Default to light mode (override system preference)
+            body.setAttribute('data-theme', 'light');
+            themeIcon.textContent = '🌙';
+        }
+    </script>
 </body>
 </html>

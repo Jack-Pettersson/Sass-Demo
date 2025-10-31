@@ -1,0 +1,138 @@
+// ============================================
+// BUTTONS
+// Button component styles with variants
+// Demonstrates: @mixin, @include, button variants, states
+// ============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+@use 'sass:map';
+@use 'sass:color';
+
+// --------------------------------------------
+// Base button styles
+// --------------------------------------------
+.btn {
+  @include button-base;
+  @extend %focus-visible;
+  
+  // Default button
+  background: $primary-color;
+  color: #fff;
+  
+  &:hover:not(:disabled) {
+    background: color.adjust($primary-color, $lightness: -10%);
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+// --------------------------------------------
+// Button variants (using @each loop)
+// Demonstrates: @each, map iteration
+// --------------------------------------------
+$button-colors: (
+  'primary': $primary-color,
+  'secondary': $secondary-color,
+  'accent': $accent-color,
+  'dark': $dark-color,
+  'warning': map.get($colors, warning),
+  'info': map.get($colors, info)
+);
+
+@each $name, $color in $button-colors {
+  .btn-#{$name} {
+    @include button-variant($color);
+  }
+  
+  .btn-outline-#{$name} {
+    @include button-outline($color);
+  }
+}
+
+// --------------------------------------------
+// Button sizes
+// Demonstrates: Size modifiers
+// --------------------------------------------
+.btn-sm {
+  padding: $spacing-xs $spacing-md;
+  font-size: map.get($font-sizes, sm);
+}
+
+.btn-lg {
+  padding: $spacing-md $spacing-xl;
+  font-size: map.get($font-sizes, lg);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+// --------------------------------------------
+// Button group
+// --------------------------------------------
+.btn-group {
+  display: inline-flex;
+  gap: $spacing-sm;
+  
+  .btn {
+    flex: 1;
+  }
+}
+
+// --------------------------------------------
+// Icon buttons
+// --------------------------------------------
+.btn-icon {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: map.get($border-radius, full);
+  
+  &.btn-icon-sm {
+    width: 32px;
+    height: 32px;
+  }
+  
+  &.btn-icon-lg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+// --------------------------------------------
+// Loading state
+// --------------------------------------------
+.btn-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

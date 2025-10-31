@@ -1,0 +1,65 @@
+// ============================================
+// HEADER
+// Main header styles
+// Demonstrates: Flexbox, gradients, nesting
+// ============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as ph;
+@use 'sass:map';
+
+// --------------------------------------------
+// Main header
+// --------------------------------------------
+.main-header {
+  background: linear-gradient(90deg, #8e54e9 0%, #4776e6 100%);
+  padding: $spacing-lg 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: map.get($z-index, sticky);
+  
+  nav {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+    @include flex-between;
+    
+    .logo {
+      font-family: $font-family-heading;
+      font-size: map.get($font-sizes, xxxl);
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+      white-space: nowrap;
+      transition: transform $transition-base;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  // Responsive
+  @include respond-to-max(md) {
+    padding: $spacing-md 0;
+    
+    nav .logo {
+      font-size: map.get($font-sizes, xl);
+    }
+  }
+  
+  @include respond-to-max(sm) {
+    padding: $spacing-sm 0;
+    
+    nav {
+      justify-content: center;
+      
+      .logo {
+        font-size: map.get($font-sizes, lg);
+      }
+    }
+  }
+}

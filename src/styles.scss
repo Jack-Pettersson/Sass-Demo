@@ -1,188 +1,422 @@
+// ============================================
+// MAIN STYLES
+// Main Sass file that imports all partials
+// Demonstrates: 7-1 Architecture Pattern, @use, @forward, file organization
+// ============================================
+
+// ============================================
+// 1. ABSTRACTS
+// Variables, functions, mixins, and placeholders
+// These don't output CSS themselves
+// ============================================
+@use 'sass:map';
 @use 'sass:color';
-@use 'variables' as *;
+@use 'abstracts/variables' as *;
+@use 'abstracts/functions' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/placeholders';
 
-// Body and global styles
-body {
-  font-family: $font-family-main;
-  background: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
+// ============================================
+// 2. BASE
+// Reset/normalize and base typography
+// Foundation styles for the entire project
+// ============================================
+@use 'base/reset';
+@use 'base/typography';
 
-// Header styles
-header.main-header {
-  background: linear-gradient(90deg, #8e54e9 0%, #4776e6 100%);
-  padding: 1.5rem 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+// ============================================
+// 3. LAYOUT
+// Layout components (header, navigation, container)
+// Major structural components of the page
+// ============================================
+@use 'layout/header';
+@use 'layout/navigation';
+@use 'layout/container';
 
-  nav {
-    max-width: 60%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+// ============================================
+// 4. COMPONENTS
+// Reusable UI components (buttons, cards, forms)
+// Small, reusable pieces of the UI
+// ============================================
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/forms';
 
-    .logo {
-      font-family: $font-family-heading;
-      font-size: 2rem;
-      color: #fff;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.10);
-      white-space: nowrap;
-    }
+// ============================================
+// 5. CUSTOM CONTENT STYLES
+// Specific styles for demo content
+// ============================================
+
+// Article content
+article {
+  margin: $spacing-xl 0;
+  
+  p {
+    font-size: font-size(lg);
+    line-height: 1.8;
+    margin-bottom: $spacing-lg;
   }
 }
 
-// Main menu styles
-nav.main-menu {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  margin-bottom: 2rem;
+// ============================================
+// 6. DARK MODE SUPPORT
+// Demonstrates: Dark mode theming
+// ============================================
 
-  ul {
-    list-style: none;
-    margin: 0 auto;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-    gap: 2rem;
-    max-width: 60%;
-
-    li {
-      a {
-        display: block;
-        padding: 1rem 0.5rem;
-        color: #4776e6;
-        text-decoration: none;
-        font-family: $font-family-main;
-        font-weight: 500;
-        font-size: 1.1rem;
-        transition: color 0.2s;
-
-        &:hover {
-          color: $primary-color;
-          text-decoration: underline;
-        }
+// System preference for dark mode
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) {
+    background-color: map.get($dark-mode, bg-body);
+    color: map.get($dark-mode, text-primary);
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: map.get($dark-mode, text-primary);
+    }
+    
+    p, li, span, div {
+      color: map.get($dark-mode, text-primary);
+    }
+    
+    a {
+      color: color.adjust($primary-color, $lightness: 15%);
+      
+      &:hover {
+        color: color.adjust($primary-color, $lightness: 25%);
       }
     }
+  }
+  
+  body:not([data-theme="light"]) .text-muted {
+    color: map.get($dark-mode, text-secondary);
+  }
+  
+  body:not([data-theme="light"]) .card-text {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  body:not([data-theme="light"]) .content-wrapper,
+  body:not([data-theme="light"]) .card {
+    background-color: map.get($dark-mode, bg-card);
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  body:not([data-theme="light"]) .card-title {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  body:not([data-theme="light"]) .main-menu {
+    background-color: map.get($dark-mode, bg-card);
+  }
+  
+  body:not([data-theme="light"]) .main-menu a {
+    color: color.adjust($primary-color, $lightness: 15%);
+  }
+  
+  body:not([data-theme="light"]) .form-label {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  body:not([data-theme="light"]) .form-input,
+  body:not([data-theme="light"]) .form-select,
+  body:not([data-theme="light"]) .form-textarea {
+    background-color: map.get($dark-mode, bg-card);
+    color: map.get($dark-mode, text-primary);
+    border-color: map.get($dark-mode, border);
   }
 }
 
-// Container styles
-.container {
-  background: #fff;
-  max-width: 60%;
-  margin: 3rem auto;
-  padding: $padding;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  text-align: center;
-
-  h1 {
-    font-family: $font-family-heading;
+// Manual light mode (overrides everything)
+body[data-theme="light"] {
+  background-color: $bg-body;
+  color: $text-color-primary;
+  
+  .content-wrapper,
+  .card {
+    background-color: $bg-card;
+    color: $text-color-primary;
   }
-
-  article {
-    // Fancy blockquote styles
-    blockquote.fancy-quote {
-      position: relative;
-      background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
-      border-left: 6px solid $primary-color;
-      margin: 2rem auto 1.5rem auto;
-      padding: 1.5rem 2rem 1.5rem 2.5rem;
-      font-style: italic;
-      font-size: 1.2rem;
-      color: #333;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      max-width: 700px;
-      text-align: left;
-
-      &:before {
-        content: "\201C";
-        position: absolute;
-        left: 12px;
-        top: 10px;
-        font-size: 3rem;
-        color: $primary-color;
-        opacity: 0.2;
-        font-family: serif;
-      }
-
-      &:after {
-        content: "\201D";
-        position: absolute;
-        right: 18px;
-        bottom: 10px;
-        font-size: 3rem;
-        color: $primary-color;
-        opacity: 0.2;
-        font-family: serif;
-      }
-    }
+  
+  .main-menu {
+    background-color: #fff;
   }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    background-color: #fff;
+    color: $text-color-primary;
+    border-color: $light-color;
+  }
+}
 
-  button.btn-primary {
-    background: $primary-color;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.2s;
-
+// Manual dark mode toggle (when data-theme="dark" is set on body)
+body[data-theme="dark"] {
+  background-color: map.get($dark-mode, bg-body);
+  color: map.get($dark-mode, text-primary);
+  
+  // Typography colors
+  h1, h2, h3, h4, h5, h6 {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  p, li, span, div {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  a {
+    color: color.adjust($primary-color, $lightness: 15%);
+    
     &:hover {
-      background: color.scale($primary-color, $lightness: -10%);
+      color: color.adjust($primary-color, $lightness: 25%);
     }
   }
-}
-
-// Responsive styles
-@media (max-width: 900px) {
-  .container,
-  header.main-header nav,
-  nav.main-menu ul {
-    max-width: 90%;
+  
+  .text-muted {
+    color: map.get($dark-mode, text-secondary);
   }
-}
-
-@media (max-width: 600px) {
-  header.main-header {
-    padding: 0.5rem 0;
-
-    nav {
-      max-width: 100%;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      justify-content: center;
-
-      .logo {
-        font-size: 1.3rem;
+  
+  .card-text {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  .content-wrapper,
+  .card {
+    background-color: map.get($dark-mode, bg-card);
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  .card-title {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  .main-menu {
+    background-color: map.get($dark-mode, bg-card);
+    
+    a {
+      color: color.adjust($primary-color, $lightness: 15%);
+      
+      &:hover,
+      &.active {
+        color: color.adjust($primary-color, $lightness: 25%);
       }
     }
   }
-
-  nav.main-menu {
-    ul {
-      max-width: 100%;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      flex-direction: column;
-      gap: 0;
-
-      li {
-        a {
-          padding: 0.5rem 0.5rem;
-          font-size: 1rem;
-        }
-      }
+  
+  .form-label {
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    background-color: map.get($dark-mode, bg-card);
+    color: map.get($dark-mode, text-primary);
+    border-color: map.get($dark-mode, border);
+    
+    &::placeholder {
+      color: map.get($dark-mode, text-secondary);
     }
   }
-
-  .container {
-    margin: 1.5rem auto;
-    padding: 1rem;
-    max-width: 100%;
+  
+  .alert {
+    &-info {
+      background-color: rgba($primary-color, 0.2);
+      color: color.adjust($primary-color, $lightness: 30%);
+      border-color: color.adjust($primary-color, $lightness: 20%);
+    }
+    
+    &-success {
+      background-color: rgba($secondary-color, 0.2);
+      color: color.adjust($secondary-color, $lightness: 30%);
+      border-color: color.adjust($secondary-color, $lightness: 20%);
+    }
+    
+    &-warning {
+      background-color: rgba(map.get($colors, warning), 0.2);
+      color: color.adjust(map.get($colors, warning), $lightness: 30%);
+      border-color: color.adjust(map.get($colors, warning), $lightness: 20%);
+    }
+    
+    &-danger {
+      background-color: rgba($accent-color, 0.2);
+      color: color.adjust($accent-color, $lightness: 30%);
+      border-color: color.adjust($accent-color, $lightness: 20%);
+    }
+  }
+  
+  .fancy-quote {
+    background: linear-gradient(90deg, rgba($primary-color, 0.15) 0%, rgba($primary-color, 0.05) 100%);
+    color: map.get($dark-mode, text-primary);
+  }
+  
+  code {
+    background-color: rgba(map.get($dark-mode, bg-card), 0.5);
+    color: color.adjust($accent-color, $lightness: 20%);
+  }
+  
+  pre {
+    background-color: color.adjust(map.get($dark-mode, bg-card), $lightness: -5%);
+    color: map.get($dark-mode, text-primary);
   }
 }
+
+// ============================================
+// 7. THEME TOGGLE BUTTON
+// Custom toggle for dark mode demonstration
+// ============================================
+.theme-toggle {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  width: 50px;
+  height: 50px;
+  border-radius: map.get($border-radius, full);
+  background: $primary-color;
+  color: white;
+  @include flex-center;
+  box-shadow: $shadow-lg;
+  cursor: pointer;
+  transition: all $transition-base;
+  z-index: z(fixed);
+  border: none;
+  font-size: font-size(xl);
+  
+  &:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: $shadow-xl;
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// ============================================
+// 8. UTILITY CLASSES
+// Additional utility classes not covered in layout
+// ============================================
+
+// Divider
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, $light-color 50%, transparent 100%);
+  margin: $spacing-xl 0;
+}
+
+// Badge component
+.badge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  font-size: font-size(xs);
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  border-radius: map.get($border-radius, sm);
+  background: $primary-color;
+  color: white;
+  
+  &-secondary {
+    background: $secondary-color;
+  }
+  
+  &-accent {
+    background: $accent-color;
+  }
+}
+
+// Alert component
+.alert {
+  padding: $spacing-md $spacing-lg;
+  border-radius: map.get($border-radius, md);
+  margin-bottom: $spacing-md;
+  border-left: 4px solid;
+  
+  &-info {
+    background-color: rgba($primary-color, 0.1);
+    border-color: $primary-color;
+    color: color.adjust($primary-color, $lightness: -20%);
+  }
+  
+  &-success {
+    background-color: rgba($secondary-color, 0.1);
+    border-color: $secondary-color;
+    color: color.adjust($secondary-color, $lightness: -20%);
+  }
+  
+  &-warning {
+    background-color: rgba(map.get($colors, warning), 0.1);
+    border-color: map.get($colors, warning);
+    color: color.adjust(map.get($colors, warning), $lightness: -20%);
+  }
+  
+  &-danger {
+    background-color: rgba($accent-color, 0.1);
+    border-color: $accent-color;
+    color: color.adjust($accent-color, $lightness: -20%);
+  }
+}
+
+// Loading spinner
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid $light-color;
+  border-top-color: $primary-color;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+// Animations
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Animation utility classes
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.6s ease-out;
+}
+
+// ============================================
+// NOTES & DOCUMENTATION
+// ============================================
+// This Sass demo showcases:
+// 1. 7-1 Architecture Pattern for organized code structure
+// 2. @use and @forward for modern module system
+// 3. Variables and Maps for maintainable values
+// 4. Functions for calculations and utilities
+// 5. Mixins for reusable style patterns
+// 6. Placeholder selectors (@extend) for DRY code
+// 7. Nesting for readable, organized styles
+// 8. Control directives (@each, @if) for dynamic generation
+// 9. Built-in modules (sass:math, sass:color, sass:map)
+// 10. Responsive design with breakpoint mixins
+// 11. Dark mode support
+// 12. Component-based architecture
+// ============================================

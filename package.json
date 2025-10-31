@@ -1,0 +1,35 @@
+{
+  "name": "sass-demo",
+  "version": "2.0.0",
+  "description": "Advanced Sass Demo showcasing modern features with 7-1 architecture",
+  "main": "index.html",
+  "scripts": {
+    "sass": "sass src/styles.scss src/styles.css",
+    "sass:watch": "sass --watch src/styles.scss src/styles.css",
+    "sass:build": "sass src/styles.scss src/styles.css --style=compressed --no-source-map",
+    "dev": "sass --watch src/styles.scss src/styles.css --source-map",
+    "build": "npm run sass:build",
+    "start": "npm run sass:watch"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "css",
+    "preprocessor",
+    "demo",
+    "7-1-architecture",
+    "mixins",
+    "functions",
+    "variables"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.80.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jack-Pettersson/Sass-Demo.git"
+  },
+  "homepage": "https://jack-pettersson.github.io/Sass-Demo/"
+}

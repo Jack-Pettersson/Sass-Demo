@@ -1,0 +1,189 @@
+// ============================================
+// CARDS
+// Card component with variants
+// Demonstrates: Component patterns, hover effects, nesting
+// ============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+@use 'sass:map';
+
+// --------------------------------------------
+// Base card
+// --------------------------------------------
+.card {
+  @include card;
+  @extend %animate-base;
+  transition: all $transition-base;
+  
+  // Card with hover effect
+  &.card-hover {
+    @include hover-lift;
+  }
+  
+  // Card header
+  &-header {
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 1px solid $light-color;
+    margin: (-$spacing-lg) (-$spacing-lg) $spacing-lg;
+    background: linear-gradient(135deg, rgba($primary-color, 0.05) 0%, transparent 100%);
+    
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 0;
+    }
+  }
+  
+  // Card body
+  &-body {
+    padding: $spacing-lg;
+  }
+  
+  // Card footer
+  &-footer {
+    padding: $spacing-md $spacing-lg;
+    border-top: 1px solid $light-color;
+    margin: $spacing-lg (-$spacing-lg) (-$spacing-lg);
+    background-color: rgba($light-color, 0.3);
+  }
+  
+  // Card title
+  &-title {
+    font-size: map.get($font-sizes, xl);
+    margin-bottom: $spacing-sm;
+    color: $text-color-primary;
+  }
+  
+  // Card text
+  &-text {
+    color: $text-color-secondary;
+    margin-bottom: $spacing-md;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  // Card image
+  &-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: map.get($border-radius, md) map.get($border-radius, md) 0 0;
+    margin: (-$spacing-lg) (-$spacing-lg) $spacing-lg;
+  }
+}
+
+// --------------------------------------------
+// Card variants
+// --------------------------------------------
+.card-primary {
+  border-left: 4px solid $primary-color;
+}
+
+.card-secondary {
+  border-left: 4px solid $secondary-color;
+}
+
+.card-accent {
+  border-left: 4px solid $accent-color;
+}
+
+// --------------------------------------------
+// Card with gradient background
+// --------------------------------------------
+.card-gradient {
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  color: #fff;
+  
+  .card-title,
+  .card-text {
+    color: #fff;
+  }
+  
+  .card-footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+// --------------------------------------------
+// Card grid layout
+// Demonstrates: CSS Grid with cards
+// --------------------------------------------
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-lg;
+  
+  // Responsive adjustments
+  @include respond-to-max(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// --------------------------------------------
+// Feature card (centered content)
+// --------------------------------------------
+.card-feature {
+  text-align: center;
+  padding: $spacing-xxl;
+  
+  .card-icon {
+    font-size: map.get($font-sizes, display);
+    margin-bottom: $spacing-md;
+    display: block;
+  }
+  
+  .card-title {
+    margin-bottom: $spacing-md;
+  }
+}
+
+// --------------------------------------------
+// Stats card
+// --------------------------------------------
+.card-stat {
+  text-align: center;
+  
+  .stat-value {
+    font-size: map.get($font-sizes, display);
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    margin-bottom: $spacing-xs;
+  }
+  
+  .stat-label {
+    color: $text-color-secondary;
+    font-size: map.get($font-sizes, sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// --------------------------------------------
+// Profile card
+// --------------------------------------------
+.card-profile {
+  text-align: center;
+  padding: $spacing-xxl $spacing-lg;
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: map.get($border-radius, full);
+    margin: 0 auto $spacing-md;
+    object-fit: cover;
+    border: 4px solid $light-color;
+  }
+  
+  .profile-name {
+    font-size: map.get($font-sizes, xxl);
+    margin-bottom: $spacing-xs;
+  }
+  
+  .profile-role {
+    color: $text-color-secondary;
+    margin-bottom: $spacing-md;
+  }
+}

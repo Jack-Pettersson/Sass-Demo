@@ -1,0 +1,202 @@
+// ============================================
+// NAVIGATION
+// Navigation menu styles
+// Demonstrates: Flexbox navigation, hover states, transitions
+// ============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+@use 'sass:map';
+
+// --------------------------------------------
+// Main navigation menu
+// --------------------------------------------
+.main-menu {
+  background: #fff;
+  box-shadow: $shadow-sm;
+  margin-bottom: $spacing-xl;
+  
+  ul {
+    @include reset-list;
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+    display: flex;
+    justify-content: flex-start;
+    gap: $spacing-xl;
+    
+    li {
+      a {
+        display: block;
+        padding: $spacing-md $spacing-sm;
+        color: #4776e6;
+        text-decoration: none;
+        font-family: $font-family-main;
+        font-weight: $font-weight-medium;
+        font-size: map.get($font-sizes, lg);
+        transition: all $transition-base;
+        position: relative;
+        
+        // Underline effect
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 3px;
+          background: $primary-color;
+          transition: width $transition-base;
+        }
+        
+        &:hover {
+          color: $primary-color;
+          
+          &::after {
+            width: 100%;
+          }
+        }
+        
+        // Active state
+        &.active {
+          color: $primary-color;
+          
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  
+  // Responsive
+  @include respond-to-max(md) {
+    ul {
+      gap: $spacing-md;
+      
+      li a {
+        font-size: map.get($font-sizes, base);
+        padding: $spacing-sm;
+      }
+    }
+  }
+  
+  @include respond-to-max(sm) {
+    ul {
+      flex-direction: column;
+      gap: 0;
+      
+      li a {
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $light-color;
+        
+        &::after {
+          display: none;
+        }
+        
+        &:hover,
+        &.active {
+          background-color: rgba($primary-color, 0.05);
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------
+// Breadcrumb navigation
+// --------------------------------------------
+.breadcrumb {
+  @include reset-list;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  padding: $spacing-md 0;
+  font-size: map.get($font-sizes, sm);
+  
+  li {
+    display: flex;
+    align-items: center;
+    
+    &:not(:last-child)::after {
+      content: '/';
+      margin-left: $spacing-sm;
+      color: $text-color-light;
+    }
+    
+    a {
+      color: $primary-color;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+    &:last-child {
+      color: $text-color-secondary;
+    }
+  }
+}
+
+// --------------------------------------------
+// Tabs navigation
+// --------------------------------------------
+.tabs {
+  border-bottom: 2px solid $light-color;
+  margin-bottom: $spacing-lg;
+  
+  &-nav {
+    @include reset-list;
+    display: flex;
+    gap: 0;
+    
+    li {
+      a {
+        display: block;
+        padding: $spacing-md $spacing-lg;
+        color: $text-color-secondary;
+        text-decoration: none;
+        font-weight: $font-weight-medium;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        transition: all $transition-base;
+        
+        &:hover {
+          color: $primary-color;
+          background-color: rgba($primary-color, 0.05);
+        }
+        
+        &.active {
+          color: $primary-color;
+          border-bottom-color: $primary-color;
+          background-color: rgba($primary-color, 0.05);
+        }
+      }
+    }
+  }
+}
+
+.tab-content {
+  .tab-pane {
+    display: none;
+    
+    &.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

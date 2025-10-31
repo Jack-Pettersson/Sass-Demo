@@ -1,0 +1,167 @@
+// ============================================
+// PLACEHOLDER SELECTORS
+// Reusable style patterns using @extend
+// Demonstrates: %, @extend for code reuse without duplication
+// ============================================
+
+@use 'variables' as *;
+@use 'sass:map';
+
+// --------------------------------------------
+// Clearfix for float layouts (legacy support)
+// Usage: @extend %clearfix;
+// --------------------------------------------
+%clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// --------------------------------------------
+// Center absolutely positioned element
+// --------------------------------------------
+%center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// --------------------------------------------
+// Full width/height cover
+// --------------------------------------------
+%full-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// --------------------------------------------
+// Text styles
+// --------------------------------------------
+%text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+%text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+%text-gradient {
+  background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// --------------------------------------------
+// Interactive elements
+// --------------------------------------------
+%interactive {
+  cursor: pointer;
+  user-select: none;
+  transition: all $transition-base;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+%link-unstyled {
+  color: inherit;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// --------------------------------------------
+// Layout utilities
+// --------------------------------------------
+%container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+%section-spacing {
+  padding: $spacing-xxl 0;
+}
+
+// --------------------------------------------
+// Shadow presets
+// --------------------------------------------
+%shadow-soft {
+  box-shadow: $shadow-md;
+}
+
+%shadow-hover {
+  box-shadow: $shadow-md;
+  transition: box-shadow $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+// --------------------------------------------
+// Accessibility
+// --------------------------------------------
+%sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+%focus-visible {
+  &:focus {
+    outline: none;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+}
+
+// --------------------------------------------
+// Image utilities
+// --------------------------------------------
+%img-responsive {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+%img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// --------------------------------------------
+// Animation base
+// --------------------------------------------
+%animate-base {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}

@@ -1,0 +1,149 @@
+// ============================================
+// VARIABLES
+// This file contains all Sass variables used throughout the project
+// Demonstrates: Variables, Maps, Color Systems
+// ============================================
+
+@use 'sass:map';
+
+// --------------------------------------------
+// Color Palette - Using Sass Maps
+// --------------------------------------------
+$colors: (
+  primary: #3498db,
+  secondary: #2ecc71,
+  accent: #e74c3c,
+  dark: #2c3e50,
+  light: #ecf0f1,
+  white: #ffffff,
+  warning: #f39c12,
+  info: #9b59b6
+);
+
+// Color utility function access
+$primary-color: map.get($colors, primary);
+$secondary-color: map.get($colors, secondary);
+$accent-color: map.get($colors, accent);
+$dark-color: map.get($colors, dark);
+$light-color: map.get($colors, light);
+
+// Text colors
+$text-color-primary: #333333;
+$text-color-secondary: #666666;
+$text-color-light: #999999;
+
+// Background colors
+$bg-body: #f4f4f4;
+$bg-card: #ffffff;
+$bg-dark: #2c3e50;
+
+// --------------------------------------------
+// Spacing Scale System
+// Demonstrates consistent spacing throughout the project
+// --------------------------------------------
+$spacing: (
+  xs: 0.25rem,   // 4px
+  sm: 0.5rem,    // 8px
+  md: 1rem,      // 16px
+  lg: 1.5rem,    // 24px
+  xl: 2rem,      // 32px
+  xxl: 3rem,     // 48px
+  xxxl: 4rem     // 64px
+);
+
+// Quick access spacing variables
+$spacing-xs: map.get($spacing, xs);
+$spacing-sm: map.get($spacing, sm);
+$spacing-md: map.get($spacing, md);
+$spacing-lg: map.get($spacing, lg);
+$spacing-xl: map.get($spacing, xl);
+$spacing-xxl: map.get($spacing, xxl);
+$spacing-xxxl: map.get($spacing, xxxl);
+
+// Legacy variable for backward compatibility
+$padding: $spacing-lg;
+
+// --------------------------------------------
+// Typography
+// --------------------------------------------
+$font-family-main: 'Quicksand', Calibri, Arial, sans-serif;
+$font-family-heading: 'Pacifico', Calibri, cursive, Arial, sans-serif;
+$font-family-mono: 'Courier New', Courier, monospace;
+
+// Font sizes using a type scale
+$font-sizes: (
+  xs: 0.75rem,   // 12px
+  sm: 0.875rem,  // 14px
+  base: 1rem,    // 16px
+  lg: 1.125rem,  // 18px
+  xl: 1.25rem,   // 20px
+  xxl: 1.5rem,   // 24px
+  xxxl: 2rem,    // 32px
+  display: 3rem  // 48px
+);
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// --------------------------------------------
+// Breakpoints for Responsive Design
+// --------------------------------------------
+$breakpoints: (
+  xs: 320px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// --------------------------------------------
+// Layout
+// --------------------------------------------
+$container-max-width: 1200px;
+$container-padding: $spacing-lg;
+
+// Border radius scale
+$border-radius: (
+  sm: 4px,
+  md: 8px,
+  lg: 12px,
+  xl: 16px,
+  full: 9999px
+);
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+$shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+$shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.16);
+
+// Transitions
+$transition-fast: 0.15s ease-in-out;
+$transition-base: 0.2s ease-in-out;
+$transition-slow: 0.3s ease-in-out;
+
+// Z-index scale
+$z-index: (
+  dropdown: 1000,
+  sticky: 1020,
+  fixed: 1030,
+  modal-backdrop: 1040,
+  modal: 1050,
+  popover: 1060,
+  tooltip: 1070
+);
+
+// --------------------------------------------
+// Dark Mode Colors
+// --------------------------------------------
+$dark-mode: (
+  bg-body: #1a1a1a,
+  bg-card: #2d2d2d,
+  text-primary: #e0e0e0,
+  text-secondary: #b0b0b0,
+  border: #404040
+);

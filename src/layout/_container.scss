@@ -1,0 +1,275 @@
+// ============================================
+// CONTAINER & LAYOUT
+// Container and general layout utilities
+// Demonstrates: Container patterns, sections, grid layouts
+// ============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+@use 'sass:map';
+
+// --------------------------------------------
+// Main container
+// --------------------------------------------
+.container {
+  @extend %container;
+  
+  // Narrow container variant
+  &-narrow {
+    max-width: 800px;
+  }
+  
+  // Wide container variant
+  &-wide {
+    max-width: 1400px;
+  }
+  
+  // Fluid container
+  &-fluid {
+    max-width: 100%;
+  }
+}
+
+// --------------------------------------------
+// Content wrapper (with card styling)
+// --------------------------------------------
+.content-wrapper {
+  background: #fff;
+  margin-top: $spacing-xxl;
+  margin-bottom: $spacing-xxl;
+  padding: $spacing-xxl;
+  border-radius: map.get($border-radius, md);
+  box-shadow: $shadow-md;
+  text-align: center;
+  
+  @include respond-to-max(md) {
+    margin-top: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    padding: $spacing-lg;
+  }
+  
+  @include respond-to-max(sm) {
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-md;
+    padding: $spacing-md;
+  }
+}
+
+// --------------------------------------------
+// Section spacing
+// --------------------------------------------
+.section {
+  @extend %section-spacing;
+  
+  &-sm {
+    padding: $spacing-lg 0;
+  }
+  
+  &-lg {
+    padding: $spacing-xxxl 0;
+  }
+  
+  // Section header
+  &-header {
+    text-align: center;
+    margin-bottom: $spacing-xxl;
+    
+    h2 {
+      margin-bottom: $spacing-md;
+    }
+    
+    p {
+      color: $text-color-secondary;
+      font-size: map.get($font-sizes, lg);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+}
+
+// --------------------------------------------
+// Grid system
+// --------------------------------------------
+.grid {
+  @include grid(3, $spacing-lg);
+  
+  // Grid variants
+  &-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  &-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  &-auto {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  // Responsive
+  @include respond-to-max(md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    
+    &-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @include respond-to-max(sm) {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+    
+    &-2,
+    &-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// --------------------------------------------
+// Flexbox utilities
+// --------------------------------------------
+.flex {
+  display: flex;
+  
+  &-center {
+    @include flex-center;
+  }
+  
+  &-between {
+    @include flex-between;
+  }
+  
+  &-column {
+    @include flex-column;
+  }
+  
+  &-wrap {
+    flex-wrap: wrap;
+  }
+  
+  &-gap-sm {
+    gap: $spacing-sm;
+  }
+  
+  &-gap-md {
+    gap: $spacing-md;
+  }
+  
+  &-gap-lg {
+    gap: $spacing-lg;
+  }
+}
+
+// --------------------------------------------
+// Spacing utilities
+// Demonstrates: @each loop for utility generation
+// --------------------------------------------
+$spacing-sides: (top, right, bottom, left);
+$spacing-names: (xs, sm, md, lg, xl, xxl, xxxl);
+
+// Margin utilities
+@each $name in $spacing-names {
+  .m-#{$name} {
+    margin: map.get($spacing, $name) !important;
+  }
+  
+  .mt-#{$name} {
+    margin-top: map.get($spacing, $name) !important;
+  }
+  
+  .mr-#{$name} {
+    margin-right: map.get($spacing, $name) !important;
+  }
+  
+  .mb-#{$name} {
+    margin-bottom: map.get($spacing, $name) !important;
+  }
+  
+  .ml-#{$name} {
+    margin-left: map.get($spacing, $name) !important;
+  }
+  
+  .mx-#{$name} {
+    margin-left: map.get($spacing, $name) !important;
+    margin-right: map.get($spacing, $name) !important;
+  }
+  
+  .my-#{$name} {
+    margin-top: map.get($spacing, $name) !important;
+    margin-bottom: map.get($spacing, $name) !important;
+  }
+}
+
+// Padding utilities
+@each $name in $spacing-names {
+  .p-#{$name} {
+    padding: map.get($spacing, $name) !important;
+  }
+  
+  .pt-#{$name} {
+    padding-top: map.get($spacing, $name) !important;
+  }
+  
+  .pr-#{$name} {
+    padding-right: map.get($spacing, $name) !important;
+  }
+  
+  .pb-#{$name} {
+    padding-bottom: map.get($spacing, $name) !important;
+  }
+  
+  .pl-#{$name} {
+    padding-left: map.get($spacing, $name) !important;
+  }
+  
+  .px-#{$name} {
+    padding-left: map.get($spacing, $name) !important;
+    padding-right: map.get($spacing, $name) !important;
+  }
+  
+  .py-#{$name} {
+    padding-top: map.get($spacing, $name) !important;
+    padding-bottom: map.get($spacing, $name) !important;
+  }
+}
+
+// --------------------------------------------
+// Blockquote styling (fancy quote)
+// --------------------------------------------
+.fancy-quote {
+  position: relative;
+  background: linear-gradient(90deg, #e0eafc 0%, #cfdef3 100%);
+  border-left: 6px solid $primary-color;
+  margin: $spacing-xl auto;
+  padding: $spacing-lg $spacing-xl $spacing-lg calc($spacing-xl + 0.5rem);
+  font-style: italic;
+  font-size: map.get($font-sizes, xl);
+  color: #333;
+  border-radius: map.get($border-radius, md);
+  box-shadow: $shadow-md;
+  max-width: 700px;
+  text-align: left;
+  
+  &::before {
+    @include pseudo($content: "\201C");
+    left: 12px;
+    top: 10px;
+    font-size: map.get($font-sizes, display);
+    color: $primary-color;
+    opacity: 0.2;
+    font-family: serif;
+  }
+  
+  &::after {
+    @include pseudo($content: "\201D");
+    right: 18px;
+    bottom: 10px;
+    font-size: map.get($font-sizes, display);
+    color: $primary-color;
+    opacity: 0.2;
+    font-family: serif;
+  }
+}

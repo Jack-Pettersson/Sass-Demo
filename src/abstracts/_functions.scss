@@ -1,0 +1,146 @@
+// ============================================
+// FUNCTIONS
+// Custom Sass functions for reusable calculations
+// Demonstrates: @function, @return, calculations
+// ============================================
+
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:list';
+@use 'variables' as *;
+
+// --------------------------------------------
+// Convert px to rem
+// Usage: font-size: px-to-rem(18px);
+// --------------------------------------------
+@function px-to-rem($px, $base: 16px) {
+  @if math.is-unitless($px) {
+    $px: $px * 1px;
+  }
+  @if math.is-unitless($base) {
+    $base: $base * 1px;
+  }
+  @return math.div($px, $base) * 1rem;
+}
+
+// Shorter alias
+@function rem($px, $base: 16px) {
+  @return px-to-rem($px, $base);
+}
+
+// --------------------------------------------
+// Get color from color map with optional opacity
+// Usage: color: get-color(primary, 0.8);
+// --------------------------------------------
+@function get-color($color-name, $opacity: 1) {
+  @if not map.has-key($colors, $color-name) {
+    @error "Color '#{$color-name}' not found in $colors map!";
+  }
+  
+  $color: map.get($colors, $color-name);
+  
+  @if $opacity < 1 {
+    @return rgba($color, $opacity);
+  }
+  
+  @return $color;
+}
+
+// --------------------------------------------
+// Lighten/Darken color utilities
+// Usage: background: tint(#3498db, 20%);
+// --------------------------------------------
+@function tint($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+// --------------------------------------------
+// Get spacing value from spacing map
+// Usage: margin: spacing(lg);
+// --------------------------------------------
+@function spacing($size) {
+  @if not map.has-key($spacing, $size) {
+    @error "Spacing size '#{$size}' not found! Available: #{map.keys($spacing)}";
+  }
+  @return map.get($spacing, $size);
+}
+
+// --------------------------------------------
+// Get font size from type scale
+// Usage: font-size: font-size(xl);
+// --------------------------------------------
+@function font-size($size) {
+  @if not map.has-key($font-sizes, $size) {
+    @error "Font size '#{$size}' not found! Available: #{map.keys($font-sizes)}";
+  }
+  @return map.get($font-sizes, $size);
+}
+
+// --------------------------------------------
+// Calculate strip unit (for math operations)
+// Usage: $unitless: strip-unit(16px);
+// --------------------------------------------
+@function strip-unit($number) {
+  @if math.is-unitless($number) {
+    @return $number;
+  }
+  @return math.div($number, $number * 0 + 1);
+}
+
+// --------------------------------------------
+// Get breakpoint value
+// Usage: @media (min-width: breakpoint(md)) { ... }
+// --------------------------------------------
+@function breakpoint($size) {
+  @if not map.has-key($breakpoints, $size) {
+    @error "Breakpoint '#{$size}' not found! Available: #{map.keys($breakpoints)}";
+  }
+  @return map.get($breakpoints, $size);
+}
+
+// --------------------------------------------
+// Get z-index value
+// Usage: z-index: z(modal);
+// --------------------------------------------
+@function z($layer) {
+  @if not map.has-key($z-index, $layer) {
+    @error "Z-index layer '#{$layer}' not found! Available: #{map.keys($z-index)}";
+  }
+  @return map.get($z-index, $layer);
+}
+
+// --------------------------------------------
+// Calculate contrast ratio (for accessibility)
+// Usage: $ratio: contrast-ratio(#333, #fff);
+// --------------------------------------------
+@function luminance($color) {
+  $rgb: (
+    red: color.red($color),
+    green: color.green($color),
+    blue: color.blue($color)
+  );
+  
+  @each $name, $value in $rgb {
+    $value: math.div($value, 255);
+    $value: if($value < 0.03928, math.div($value, 12.92), math.pow(math.div($value + 0.055, 1.055), 2.4));
+    $rgb: map.merge($rgb, ($name: $value));
+  }
+  
+  @return map.get($rgb, red) * 0.2126 + map.get($rgb, green) * 0.7152 + map.get($rgb, blue) * 0.0722;
+}
+
+@function contrast-ratio($color1, $color2) {
+  $l1: luminance($color1);
+  $l2: luminance($color2);
+  
+  @if $l1 > $l2 {
+    @return math.div($l1 + 0.05, $l2 + 0.05);
+  } @else {
+    @return math.div($l2 + 0.05, $l1 + 0.05);
+  }
+}

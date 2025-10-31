@@ -1,0 +1,221 @@
+// ============================================
+// TYPOGRAPHY
+// Base typography styles and heading definitions
+// Demonstrates: Font families, type scale, line heights
+// ============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use 'sass:map';
+@use 'sass:color';
+
+// --------------------------------------------
+// Body typography
+// --------------------------------------------
+body {
+  font-family: $font-family-main;
+  font-size: map.get($font-sizes, base);
+  font-weight: $font-weight-normal;
+  line-height: 1.6;
+  color: $text-color-primary;
+  background-color: $bg-body;
+}
+
+// --------------------------------------------
+// Headings
+// --------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+  color: $text-color-primary;
+}
+
+h1 {
+  font-size: map.get($font-sizes, display);
+  margin-bottom: $spacing-lg;
+}
+
+h2 {
+  font-size: map.get($font-sizes, xxxl);
+}
+
+h3 {
+  font-size: map.get($font-sizes, xxl);
+}
+
+h4 {
+  font-size: map.get($font-sizes, xl);
+}
+
+h5 {
+  font-size: map.get($font-sizes, lg);
+}
+
+h6 {
+  font-size: map.get($font-sizes, base);
+}
+
+// --------------------------------------------
+// Paragraphs and text
+// --------------------------------------------
+p {
+  margin-bottom: $spacing-md;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// --------------------------------------------
+// Links
+// --------------------------------------------
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-base;
+  
+  &:hover {
+    color: color.adjust($primary-color, $lightness: -15%);
+    text-decoration: underline;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+// --------------------------------------------
+// Text utilities
+// --------------------------------------------
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: $text-color-secondary;
+}
+
+.text-light {
+  color: $text-color-light;
+}
+
+.text-small {
+  font-size: map.get($font-sizes, sm);
+}
+
+.text-large {
+  font-size: map.get($font-sizes, lg);
+}
+
+.text-bold {
+  font-weight: $font-weight-bold;
+}
+
+// --------------------------------------------
+// Code and preformatted text
+// --------------------------------------------
+code,
+kbd,
+pre,
+samp {
+  font-family: $font-family-mono;
+  font-size: map.get($font-sizes, sm);
+}
+
+code {
+  padding: 0.125rem 0.25rem;
+  background-color: $light-color;
+  border-radius: map.get($border-radius, sm);
+  color: $accent-color;
+}
+
+pre {
+  background-color: $dark-color;
+  color: $light-color;
+  padding: $spacing-md;
+  border-radius: map.get($border-radius, md);
+  overflow-x: auto;
+  margin-bottom: $spacing-md;
+  
+  code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+}
+
+// --------------------------------------------
+// Blockquotes
+// --------------------------------------------
+blockquote {
+  margin: $spacing-lg 0;
+  padding-left: $spacing-lg;
+  border-left: 4px solid $primary-color;
+  font-style: italic;
+  color: $text-color-secondary;
+}
+
+// --------------------------------------------
+// Lists
+// --------------------------------------------
+ul, ol {
+  margin-bottom: $spacing-md;
+  padding-left: $spacing-xl;
+  
+  &.unstyled {
+    list-style: none;
+    padding-left: 0;
+  }
+}
+
+li {
+  margin-bottom: $spacing-xs;
+}
+
+// --------------------------------------------
+// Horizontal rule
+// --------------------------------------------
+hr {
+  border: 0;
+  border-top: 1px solid $light-color;
+  margin: $spacing-xl 0;
+}
+
+// --------------------------------------------
+// Emphasis and strong
+// --------------------------------------------
+em, i {
+  font-style: italic;
+}
+
+strong, b {
+  font-weight: $font-weight-bold;
+}
+
+// --------------------------------------------
+// Small text
+// --------------------------------------------
+small {
+  font-size: map.get($font-sizes, sm);
+}
+
+// --------------------------------------------
+// Mark/highlight
+// --------------------------------------------
+mark {
+  background-color: #fff3cd;
+  padding: 0.125rem 0.25rem;
+  border-radius: 2px;
+}

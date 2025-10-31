@@ -1,0 +1,277 @@
+// ============================================
+// FORMS
+// Form input styles and validation states
+// Demonstrates: Form styling, pseudo-classes, validation
+// ============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+@use 'sass:map';
+
+// --------------------------------------------
+// Form groups
+// --------------------------------------------
+.form-group {
+  margin-bottom: $spacing-lg;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// --------------------------------------------
+// Labels
+// --------------------------------------------
+.form-label {
+  display: block;
+  margin-bottom: $spacing-xs;
+  font-weight: $font-weight-medium;
+  color: $text-color-primary;
+  font-size: map.get($font-sizes, sm);
+  
+  &.required::after {
+    content: '*';
+    color: $accent-color;
+    margin-left: $spacing-xs;
+  }
+}
+
+// --------------------------------------------
+// Input fields
+// --------------------------------------------
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  font-size: map.get($font-sizes, base);
+  font-family: $font-family-main;
+  line-height: 1.5;
+  color: $text-color-primary;
+  background-color: #fff;
+  border: 2px solid $light-color;
+  border-radius: map.get($border-radius, sm);
+  transition: all $transition-base;
+  
+  &::placeholder {
+    color: $text-color-light;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
+  
+  &:disabled {
+    background-color: $light-color;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  // Validation states
+  &.is-valid {
+    border-color: $secondary-color;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($secondary-color, 0.1);
+    }
+  }
+  
+  &.is-invalid {
+    border-color: $accent-color;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($accent-color, 0.1);
+    }
+  }
+}
+
+// --------------------------------------------
+// Textarea specific
+// --------------------------------------------
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+// --------------------------------------------
+// Select dropdown
+// --------------------------------------------
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-sm center;
+  padding-right: $spacing-xl;
+}
+
+// --------------------------------------------
+// Checkboxes and radios
+// --------------------------------------------
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+  
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-right: $spacing-sm;
+    cursor: pointer;
+    accent-color: $primary-color;
+  }
+  
+  label {
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+// --------------------------------------------
+// Form feedback messages
+// --------------------------------------------
+.form-feedback {
+  font-size: map.get($font-sizes, sm);
+  margin-top: $spacing-xs;
+  
+  &.valid-feedback {
+    color: $secondary-color;
+  }
+  
+  &.invalid-feedback {
+    color: $accent-color;
+  }
+}
+
+// --------------------------------------------
+// Form help text
+// --------------------------------------------
+.form-help {
+  font-size: map.get($font-sizes, sm);
+  color: $text-color-secondary;
+  margin-top: $spacing-xs;
+}
+
+// --------------------------------------------
+// Input groups (with icons or buttons)
+// --------------------------------------------
+.input-group {
+  display: flex;
+  width: 100%;
+  
+  .form-input {
+    flex: 1;
+  }
+  
+  .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background-color: $light-color;
+    border: 2px solid $light-color;
+    color: $text-color-secondary;
+    white-space: nowrap;
+    
+    &:first-child {
+      border-right: 0;
+      border-radius: map.get($border-radius, sm) 0 0 map.get($border-radius, sm);
+    }
+    
+    &:last-child {
+      border-left: 0;
+      border-radius: 0 map.get($border-radius, sm) map.get($border-radius, sm) 0;
+    }
+  }
+  
+  .form-input:not(:first-child) {
+    border-left: 0;
+    border-radius: 0 map.get($border-radius, sm) map.get($border-radius, sm) 0;
+  }
+  
+  .form-input:not(:last-child) {
+    border-right: 0;
+    border-radius: map.get($border-radius, sm) 0 0 map.get($border-radius, sm);
+  }
+}
+
+// --------------------------------------------
+// Inline forms
+// --------------------------------------------
+.form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-md;
+  
+  .form-group {
+    margin-bottom: 0;
+    flex: 1;
+  }
+  
+  .btn {
+    flex-shrink: 0;
+  }
+}
+
+// --------------------------------------------
+// Search form
+// --------------------------------------------
+.search-form {
+  position: relative;
+  
+  .form-input {
+    padding-right: 40px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-color-light;
+    pointer-events: none;
+  }
+}
+
+// --------------------------------------------
+// Range input
+// --------------------------------------------
+.form-range {
+  width: 100%;
+  height: 6px;
+  background: $light-color;
+  border-radius: map.get($border-radius, full);
+  outline: none;
+  
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: $primary-color;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all $transition-base;
+    
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: $primary-color;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: all $transition-base;
+    
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
